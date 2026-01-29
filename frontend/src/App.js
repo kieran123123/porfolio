@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     // Fetches from your Django local server
-    axios.get('http://127.0.0.1:8000/api/projects/')
+    axios.get('http://43.224.181.220:8000/api/projects/')
       .then(res => setProjects(res.data))
       .catch(err => console.error("API Error:", err));
   }, []);
