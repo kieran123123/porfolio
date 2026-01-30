@@ -30,8 +30,30 @@ SECRET_KEY = 'django-insecure-!u^5zu6+(6ho9%pbf#^n*9c3z^=)b=t42*=31rh-i0=449y=i5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['43.224.181.220', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'kierandev.com',
+    'www.kierandev.com',
+    '43.224.181.220',
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://kierandev.com",
+    "https://www.kierandev.com",
+    "http://kierandev.com",
+    "http://www.kierandev.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://kierandev.com",
+    "https://www.kierandev.com",
+]
 
 # Application definition
 
@@ -57,8 +79,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://43.224.181.220", "http://127.0.0.1:3000",]
 
 ROOT_URLCONF = 'portfolio.urls'
 
@@ -91,8 +111,8 @@ if IS_PRODUCTION:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'portfolio_db',
-            'USER': 'kieran_admin',
-            'PASSWORD': 'your_vps_db_password',
+            'USER': 'portfolio_user',
+            'PASSWORD': 'admin',
             'HOST': 'localhost',
             'PORT': '5432',
         }
