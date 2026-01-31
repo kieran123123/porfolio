@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .lab-container { font-family: 'Courier New', Courier, monospace; background: #1a1a1a; color: #00ff00; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+    .display-box { font-size: 2rem; margin: 20px 0; min-height: 50px; border-bottom: 2px solid #00ff00; }
+    .stats { color: #888; font-size: 0.9rem; }
+    button { background: #00ff00; color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
+</style>
+
+<div class="lab-container">
+    <h1>Project: Genetic Identity</h1>
+    <p>Target: <span id="target-name">Kieran Smith</span></p>
+    
+    <div id="best-match" class="display-box">????????????</div>
+
+    <div class="stats">
+        Generation: <span id="gen-count">0</span> | 
+        Fitness: <span id="fitness-score">0%</span>
+    </div>
+
+    <br>
+    <button onclick="startEvolution()">Execute Algorithm</button>
+</div>
+
+<script>
+// This is your logic.py translated to JavaScript
+class GeneticEvolver {
+    constructor(target) {
+        this.target = target;
+        this.popSize = 100;
+        this.mutationRate = 0.02;
+        this.generation = 0;
+        this.population = Array.from({ length: this.popSize }, () => this.randomStr());
+    }
+
+    randomStr() {
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+        return Array.from({ length: this.target.length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
+
+    getFitness(genes) {
+        let matches = 0;
+        for (let i = 0; i < this.target.length; i++) {
+            if (genes[i] === this.target[i]) matches++;
+        }
+        return matches / this.target.length;
+    }
+
+    evolve() {
+        this.population.sort((a, b) => this.getFitness(b) - this.getFitness(a));
+        let best = this.population[0];
+        let nextGen = [best]; // Elitism
+
+        while (nextGen.length < this.popSize) {
+            let p1 = this.population[Math.floor(Math.random() * 10)];
+            let p2 = this.population[Math.floor(Math.random() * 10)];
+            let child = this.crossover(p1, p2);
+            nextGen.push(this.mutate(child));
+        }
+        this.population = nextGen;
+        this.generation++;
+        return best;
+    }
+
+    crossover(p1, p2) {
+        let pivot = Math.floor(Math.random() * this.target.length);
+        return p1.substring(0, pivot) + p2.substring(pivot);
+    }
+
+    mutate(genes) {
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+        return genes.split('').map(c => Math.random() < this.mutationRate ? chars[Math.floor(Math.random() * chars.length)] : c).join('');
+    }
+}
+
+const evolver = new GeneticEvolver("Kieran Smith");
+
+function startEvolution() {
+    const loop = setInterval(() => {
+        const best = evolver.evolve();
+        document.getElementById('best-match').innerText = best;
+        document.getElementById('gen-count').innerText = evolver.generation;
+        document.getElementById('fitness-score').innerText = (evolver.getFitness(best) * 100).toFixed(1) + "%";
+
+        if (best === "Kieran Smith") clearInterval(loop);
+    }, 30);
+}
+</script>
+{% endblock %}

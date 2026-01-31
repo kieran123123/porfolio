@@ -1,31 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import GeneticIdentity from './components/GeneticIdentity';
 import { 
   Menu, X, Github, Linkedin, ExternalLink, 
   Terminal, ShieldCheck, Cpu, Layout, Layers 
 } from 'lucide-react';
 
-function App() {
-  const [projects, setProjects] = useState([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    // Relative path works on both localhost (via proxy) and VPS (via Nginx)
-    axios.get('/api/projects/')
-      .then(res => setProjects(res.data))
-      .catch(err => console.error("API Error:", err));
-  }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+// Create a component for your main landing page
+const Portfolio = ({ projects, isMenuOpen, setIsMenuOpen, scrollToSection }) => (
+  <div className="min-h-screen bg-white font-sans text-slate-900">
       
       {/* --- 1. TECH STACK BANNER --- */}
       <div className="bg-slate-900 border-b border-slate-800 py-2 w-full">
@@ -275,8 +259,66 @@ function App() {
           </div>
         </div>
       </footer>
-    </div>
+  </div>
+);
+
+function App() {
+  const [projects, setProjects] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    axios.get('/api/projects/')
+      .then(res => setProjects(res.data))
+      .catch(err => console.error("API Error:", err));
+  }, []);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
+
+  return (
+    <Router>
+      <Routes>
+        {/* Main Page */}
+        <Route path="/" element={
+          <Portfolio 
+            projects={projects} 
+            isMenuOpen={isMenuOpen} 
+            setIsMenuOpen={setIsMenuOpen} 
+            scrollToSection={scrollToSection} 
+          />
+        } />
+
+        {/* The Separate Page */}
+        <Route path="/genetic-identity" element={<GeneticIdentity />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
