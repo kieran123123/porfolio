@@ -35,7 +35,7 @@ function App() {
             <span className="text-slate-300">System Status: Online</span>
           </span>
           <span className="hidden md:inline text-slate-700">•</span>
-          <span>Stack: Django + React + PostgreSQL</span>
+          <span>Stack: Django + React + Tailwind + PostgreSQL</span>
           <span className="hidden md:inline text-slate-700">•</span>
           <span>Deployed via Gunicorn & Nginx</span>
         </div>
@@ -89,7 +89,7 @@ function App() {
               <b> British Telecom's (BT)</b> call centres—securing government-grade telephony workflows.
             </p>
             <p>
-              <b>Note:</b> Currently on a Working-Holiday Visa in Australia seeking <b>sponsorship</b>.
+              <b>Note:</b> Currently on a Working-Holiday Visa in Australia.
             </p>
           </div>
           
@@ -98,7 +98,7 @@ function App() {
               <Github size={20} />
               <span>GitHub</span>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 border border-slate-200 px-6 py-3 rounded-xl hover:bg-slate-50 transition-all">
+            <a href="https://www.linkedin.com/in/kieran-smith-624433170/" target="_blank" rel="noreferrer" className="flex items-center space-x-2 border border-slate-200 px-6 py-3 rounded-xl hover:bg-slate-50 transition-all">
               <Linkedin size={20} className="text-blue-700" />
               <span>LinkedIn</span>
             </a>
@@ -151,6 +151,63 @@ function App() {
               </p>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* --- NEW: EXPERIENCE TIMELINE --- */}
+      <section id="experience" className="py-24 px-6 border-t border-slate-100">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold tracking-tight">Professional History</h2>
+            <div className="h-1 w-20 bg-blue-600 mt-2 rounded-full"></div>
+          </div>
+
+          <div className="space-y-12">
+            {/* Origin8tive */}
+            <div className="relative pl-8 border-l-2 border-slate-200">
+              <div className="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-white"></div>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-extrabold text-slate-900">Software Engineer</h3>
+                  <p className="text-blue-600 font-bold">Origin8tive | Cheltenham, UK</p>
+                </div>
+                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1 md:mt-0">April 2024 — Oct 2025</p>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Independently engineered a custom <b>SIP Adapter</b> for British Telecom’s (BT) GTAS ecosystem. 
+                I was responsible for automating mission-critical testing for government-grade telephony workflows, 
+                securing systems that manage millions in annual revenue.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['Python', 'SIP/RTP', 'Wireshark', 'Docker', 'AWS'].map(tech => (
+                  <span key={tech} className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold uppercase">{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Noriker Power */}
+            <div className="relative pl-8 border-l-2 border-slate-200">
+              <div className="absolute -left-[9px] top-0 w-4 h-4 bg-slate-300 rounded-full border-4 border-white"></div>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-extrabold text-slate-900">Junior Software Engineer</h3>
+                  <p className="text-blue-600 font-bold">Noriker Power | Cheltenham, UK</p>
+                </div>
+                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1 md:mt-0">Nov 2022 — April 2024</p>
+              </div>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Worked within an Agile team of 5 to develop industrial monitoring and control tools for 
+                <b> National Grid</b> infrastructure. We built the software that allowed electrical engineers 
+                to analyze and send real-time instructions to site-specific grid controllers and enabled 
+                the trading team to execute power trades on the UK national market.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['Django', 'VueJS', 'Tailwind', 'Linux (Sudo/Root)', 'Jenkins', 'PostgreSQL'].map(tech => (
+                  <span key={tech} className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold uppercase">{tech}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
